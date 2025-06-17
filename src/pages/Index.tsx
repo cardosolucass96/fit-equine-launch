@@ -1,12 +1,33 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useState, useEffect } from "react";
+import StickyBar from "@/components/StickyBar";
+import Hero from "@/components/Hero";
+import Benefits from "@/components/Benefits";
+import MetabolicSyndrome from "@/components/MetabolicSyndrome";
+import TechnicalLibrary from "@/components/TechnicalLibrary";
+import LeadForm from "@/components/LeadForm";
+import FAQ from "@/components/FAQ";
+import Footer from "@/components/Footer";
 
 const Index = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-white font-open-sans">
+      <StickyBar />
+      <main className={`transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+        <Hero />
+        <Benefits />
+        <MetabolicSyndrome />
+        <TechnicalLibrary />
+        <LeadForm />
+        <FAQ />
+      </main>
+      <Footer />
     </div>
   );
 };
