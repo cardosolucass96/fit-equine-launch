@@ -12,7 +12,7 @@ const Footer = () => {
               <img
                 src="https://integralmix.com.br/wp-content/themes/integral/assets/images/logo.svg"
                 alt="Integral Mix"
-                className="h-8"
+                className="h-12"
               />
               <p className="text-gray-400 text-sm mt-2">alimentando o futuro</p>
             </div>
