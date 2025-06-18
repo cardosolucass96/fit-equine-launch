@@ -28,12 +28,6 @@ const points = [
       "Artigos e insights práticos para o haras."
   },
   {
-    icon: Video,
-    title: "Webinars e lives exclusivas",
-    description:
-      "Encontros mensais com especialistas."
-  },
-  {
     icon: BellRing,
     title: "Primeiro a saber",
     description:
