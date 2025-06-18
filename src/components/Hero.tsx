@@ -16,14 +16,10 @@ const Hero = () => {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?q=80&w=2126&auto=format&fit=crop')`
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://i.imgur.com/sVwOizP.jpeg')`
         }}
       />
       
-      {/* Strategic Feed Badge */}
-      <Badge className="absolute top-8 right-8 bg-turquoise text-white px-4 py-2 font-montserrat font-semibold text-sm">
-        Strategic Feed
-      </Badge>
 
       {/* Content */}
       <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">

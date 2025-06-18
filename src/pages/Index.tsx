@@ -1,6 +1,5 @@
 
 import { useState, useEffect } from "react";
-import StickyBar from "@/components/StickyBar";
 import Hero from "@/components/Hero";
 import Benefits from "@/components/Benefits";
 import MetabolicSyndrome from "@/components/MetabolicSyndrome";
@@ -18,7 +17,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-white font-open-sans">
-      <StickyBar />
       <main className={`transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
         <Hero />
         <Benefits />
