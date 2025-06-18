@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import { v4 as uuid } from 'uuid';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -37,6 +38,7 @@ const LeadForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    const eventID = uuid();
 
     // Validate required fields
     if (!formData.name || !formData.email || !formData.whatsapp || !formData.lgpdConsent) {
@@ -50,8 +52,18 @@ const LeadForm = () => {
     }
 
     try {
-      // Simulate API call to MailerLite
-      console.log("Submitting form data:", formData);
+      if (typeof window !== 'undefined' && (window as any).fbq) {
+        (window as any).fbq('track', 'Lead', {
+          content_name: formData.crm,
+          eventID
+        });
+      }
+
+      await fetch('/api/fb', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, event_id: eventID })
+      });
       
       // Send event to dataLayer for Google Tag Manager
       if (typeof window !== 'undefined' && window.dataLayer) {
