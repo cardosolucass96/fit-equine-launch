@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Hero from "@/components/Hero";
 import Benefits from "@/components/Benefits";
 import MetabolicSyndrome from "@/components/MetabolicSyndrome";
-import TechnicalLibrary from "@/components/TechnicalLibrary";
+import ExpertCommunity from "@/components/TechnicalLibrary";
 import LeadForm from "@/components/LeadForm";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
@@ -21,7 +21,7 @@ const Index = () => {
         <Hero />
         <Benefits />
         <MetabolicSyndrome />
-        <TechnicalLibrary />
+        <ExpertCommunity />
         <LeadForm />
         <FAQ />
       </main>
