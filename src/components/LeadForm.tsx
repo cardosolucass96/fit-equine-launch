@@ -52,6 +52,11 @@ const LeadForm = () => {
     profession: "",
     state: "",
     city: "",
+    utm_source: "",
+    utm_medium: "",
+    utm_campaign: "",
+    utm_term: "",
+    utm_content: "",
     lgpdConsent: false,
   });
   const [cities, setCities] = useState<string[]>([]);
@@ -60,6 +65,19 @@ const LeadForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { toast } = useToast();
+
+  // Capture UTM parameters on load
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    setFormData((prev) => ({
+      ...prev,
+      utm_source: params.get('utm_source') || '',
+      utm_medium: params.get('utm_medium') || '',
+      utm_campaign: params.get('utm_campaign') || '',
+      utm_term: params.get('utm_term') || '',
+      utm_content: params.get('utm_content') || '',
+    }));
+  }, []);
 
   useEffect(() => {
     const uf = formData.state;
@@ -232,6 +250,11 @@ const LeadForm = () => {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6 bg-gray-50 rounded-2xl p-8">
+            <input type="hidden" id="utm_source" name="utm_source" value={formData.utm_source} />
+            <input type="hidden" id="utm_medium" name="utm_medium" value={formData.utm_medium} />
+            <input type="hidden" id="utm_campaign" name="utm_campaign" value={formData.utm_campaign} />
+            <input type="hidden" id="utm_term" name="utm_term" value={formData.utm_term} />
+            <input type="hidden" id="utm_content" name="utm_content" value={formData.utm_content} />
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <Label htmlFor="name" className="font-montserrat font-semibold">

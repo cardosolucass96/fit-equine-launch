@@ -59,5 +59,23 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const params = new URLSearchParams(window.location.search);
+        const utmKeys = [
+          'utm_source',
+          'utm_medium',
+          'utm_campaign',
+          'utm_term',
+          'utm_content'
+        ];
+        utmKeys.forEach(function (key) {
+          const input = document.getElementById(key);
+          if (input) {
+            input.value = params.get(key) || '';
+          }
+        });
+      });
+    </script>
   </body>
 </html>
