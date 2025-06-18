@@ -32,6 +32,16 @@ const professions = [
   "COMPETIDOR",
 ];
 
+const formatWhatsApp = (value: string) => {
+  const digits = value.replace(/\D/g, '').slice(0, 11);
+  if (digits.length <= 2) return digits;
+  if (digits.length <= 6) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+  if (digits.length <= 10) {
+    return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
+  }
+  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+};
+
 
 const LeadForm = () => {
   const [formData, setFormData] = useState({
@@ -263,7 +273,9 @@ const LeadForm = () => {
                   type="tel"
                   placeholder="(11) 99999-9999"
                   value={formData.whatsapp}
-                  onChange={(e) => handleInputChange('whatsapp', e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange('whatsapp', formatWhatsApp(e.target.value))
+                  }
                   className="h-12"
                   required
                 />
