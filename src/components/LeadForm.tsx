@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -21,35 +21,6 @@ const professions = [
   "COMPETIDOR",
 ];
 
-const citiesByState: Record<string, string[]> = {
-  AC: ["Rio Branco", "Cruzeiro do Sul"],
-  AL: ["Maceió", "Arapiraca"],
-  AP: ["Macapá", "Santana"],
-  AM: ["Manaus", "Parintins"],
-  BA: ["Salvador", "Feira de Santana"],
-  CE: ["Fortaleza", "Juazeiro do Norte"],
-  DF: ["Brasília", "Ceilândia"],
-  ES: ["Vitória", "Vila Velha"],
-  GO: ["Goiânia", "Aparecida de Goiânia"],
-  MA: ["São Luís", "Imperatriz"],
-  MT: ["Cuiabá", "Rondonópolis"],
-  MS: ["Campo Grande", "Dourados"],
-  MG: ["Belo Horizonte", "Uberlândia", "Contagem"],
-  PA: ["Belém", "Santarém"],
-  PB: ["João Pessoa", "Campina Grande"],
-  PR: ["Curitiba", "Londrina"],
-  PE: ["Recife", "Olinda"],
-  PI: ["Teresina", "Parnaíba"],
-  RJ: ["Rio de Janeiro", "Niterói"],
-  RN: ["Natal", "Mossoró"],
-  RS: ["Porto Alegre", "Caxias do Sul"],
-  RO: ["Porto Velho", "Ji-Paraná"],
-  RR: ["Boa Vista", "Rorainópolis"],
-  SC: ["Florianópolis", "Joinville"],
-  SP: ["São Paulo", "Campinas"],
-  SE: ["Aracaju", "Itabaiana"],
-  TO: ["Palmas", "Araguaína"],
-};
 
 const LeadForm = () => {
   const [formData, setFormData] = useState({
@@ -61,9 +32,49 @@ const LeadForm = () => {
     city: "",
     lgpdConsent: false,
   });
+  const [cities, setCities] = useState<string[]>([]);
+  const [isLoadingCities, setIsLoadingCities] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { toast } = useToast();
+
+  useEffect(() => {
+    const uf = formData.state;
+    if (!uf) {
+      setCities([]);
+      return;
+    }
+
+    const cacheKey = `cities-${uf}`;
+    const cached = sessionStorage.getItem(cacheKey);
+    if (cached) {
+      setCities(JSON.parse(cached));
+      return;
+    }
+
+    const fetchCities = async () => {
+      setIsLoadingCities(true);
+      try {
+        const response = await fetch(
+          `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios?orderBy=nome`
+        );
+        const data = await response.json();
+        const names = data.map((c: { nome: string }) => c.nome);
+        setCities(names);
+        sessionStorage.setItem(cacheKey, JSON.stringify(names));
+      } catch (error) {
+        toast({
+          title: 'Erro',
+          description: 'Falha ao carregar cidades, tente novamente.',
+          variant: 'destructive',
+        });
+      } finally {
+        setIsLoadingCities(false);
+      }
+    };
+
+    fetchCities();
+  }, [formData.state, toast]);
 
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData(prev => ({
@@ -289,14 +300,14 @@ const LeadForm = () => {
               </Label>
               <Select
                 onValueChange={(value) => handleInputChange('city', value)}
-                disabled={!formData.state}
+                disabled={!formData.state || isLoadingCities}
               >
                 <SelectTrigger className="h-12">
-                  <SelectValue placeholder="Selecione sua cidade" />
+                  <SelectValue placeholder={isLoadingCities ? 'Carregando...' : 'Selecione sua cidade'} />
                 </SelectTrigger>
                 <SelectContent>
                   {formData.state &&
-                    citiesByState[formData.state]?.map((city) => (
+                    cities.map((city) => (
                       <SelectItem key={city} value={city}>
                         {city}
                       </SelectItem>
