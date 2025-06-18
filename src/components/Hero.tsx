@@ -12,12 +12,17 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden lg:mt-12">
-      {/* Background Image with Overlay */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?q=80&w=2126&auto=format&fit=crop')`
-        }}
+      {/* Background image */}
+      <img
+        src="https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?q=80&w=2126&auto=format&fit=crop"
+        alt=""
+        fetchpriority="high"
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      <div
+        className="absolute inset-0"
+        style={{ background: "rgba(0,0,0,0.6)" }}
+        aria-hidden="true"
       />
       
       {/* Strategic Feed Badge */}
