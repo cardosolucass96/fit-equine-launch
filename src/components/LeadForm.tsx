@@ -5,6 +5,17 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import { cn } from "@/lib/utils";
+import { Check, ChevronsUpDown } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Clock, Users, ExternalLink } from "lucide-react";
 
@@ -34,6 +45,7 @@ const LeadForm = () => {
   });
   const [cities, setCities] = useState<string[]>([]);
   const [isLoadingCities, setIsLoadingCities] = useState(false);
+  const [cityOpen, setCityOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { toast } = useToast();
@@ -298,22 +310,51 @@ const LeadForm = () => {
               <Label htmlFor="city" className="font-montserrat font-semibold">
                 Cidade
               </Label>
-              <Select
-                onValueChange={(value) => handleInputChange('city', value)}
-                disabled={!formData.state || isLoadingCities}
-              >
-                <SelectTrigger className="h-12">
-                  <SelectValue placeholder={isLoadingCities ? 'Carregando...' : 'Selecione sua cidade'} />
-                </SelectTrigger>
-                <SelectContent>
-                  {formData.state &&
-                    cities.map((city) => (
-                      <SelectItem key={city} value={city}>
-                        {city}
-                      </SelectItem>
-                    ))}
-                </SelectContent>
-              </Select>
+              <Popover open={cityOpen} onOpenChange={setCityOpen}>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    role="combobox"
+                    className="h-12 w-full justify-between"
+                    disabled={!formData.state || isLoadingCities}
+                  >
+                    {formData.city
+                      ? formData.city
+                      : isLoadingCities
+                        ? 'Carregando...'
+                        : 'Selecione sua cidade'}
+                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0">
+                  <Command>
+                    <CommandInput placeholder="Busque sua cidade..." />
+                    <CommandList>
+                      <CommandEmpty>Nenhuma cidade encontrada.</CommandEmpty>
+                      <CommandGroup>
+                        {cities.map((city) => (
+                          <CommandItem
+                            key={city}
+                            value={city}
+                            onSelect={(currentValue) => {
+                              handleInputChange('city', currentValue)
+                              setCityOpen(false)
+                            }}
+                          >
+                            <Check
+                              className={cn(
+                                'mr-2 h-4 w-4',
+                                formData.city === city ? 'opacity-100' : 'opacity-0'
+                              )}
+                            />
+                            {city}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
             </div>
 
             <div className="flex items-start space-x-2">
