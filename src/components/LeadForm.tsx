@@ -9,9 +9,16 @@ import { useToast } from "@/hooks/use-toast";
 import { Clock, Users, ExternalLink } from "lucide-react";
 
 const brazilianStates = [
-  "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", 
-  "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", 
+  "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA",
+  "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN",
   "RS", "RO", "RR", "SC", "SP", "SE", "TO"
+];
+
+const professions = [
+  "ZOOTECNISTA",
+  "CRIADOR",
+  "VETERINARIO",
+  "COMPETIDOR",
 ];
 
 const LeadForm = () => {
@@ -19,9 +26,9 @@ const LeadForm = () => {
     name: "",
     email: "",
     whatsapp: "",
-    crm: "",
+    profession: "",
     state: "",
-    lgpdConsent: false
+    lgpdConsent: false,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -196,17 +203,21 @@ const LeadForm = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="crm" className="font-montserrat font-semibold">
-                  CRM
+                <Label htmlFor="profession" className="font-montserrat font-semibold">
+                  Profissão
                 </Label>
-                <Input
-                  id="crm"
-                  type="text"
-                  placeholder="Número do CRM"
-                  value={formData.crm}
-                  onChange={(e) => handleInputChange('crm', e.target.value)}
-                  className="h-12"
-                />
+                <Select onValueChange={(value) => handleInputChange('profession', value)}>
+                  <SelectTrigger className="h-12">
+                    <SelectValue placeholder="Selecione sua profissão" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {professions.map((profession) => (
+                      <SelectItem key={profession} value={profession}>
+                        {profession}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             </div>
 
