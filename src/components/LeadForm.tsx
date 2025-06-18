@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from "react";
+import { v4 as uuid } from "uuid";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -143,7 +144,16 @@ const LeadForm = () => {
     try {
       // Simulate API call to MailerLite
       console.log("Submitting form data:", formData);
-      
+
+      const eventID = uuid();
+
+      if (typeof window !== 'undefined' && (window as any).fbq) {
+        (window as any).fbq('track', 'Lead', {
+          content_name: formData.profession,
+          eventID: eventID,
+        });
+      }
+
       // Send event to dataLayer for Google Tag Manager
       if (typeof window !== 'undefined' && window.dataLayer) {
         window.dataLayer.push({
@@ -166,6 +176,15 @@ const LeadForm = () => {
         body: JSON.stringify(formData)
       }).catch((error) => {
         console.error('Failed to send webhook', error);
+      });
+
+      // Send data to backend for Facebook CAPI
+      await fetch('/api/fb', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, event_id: eventID })
+      }).catch((error) => {
+        console.error('Failed to send to fb api', error);
       });
 
       // Simulate API delay
