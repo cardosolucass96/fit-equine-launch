@@ -20,10 +20,6 @@ const Hero = () => {
         }}
       />
       
-      {/* Strategic Feed Badge */}
-      <Badge className="absolute top-8 right-8 bg-turquoise text-white px-4 py-2 font-montserrat font-semibold text-sm">
-        Strategic Feed
-      </Badge>
 
       {/* Content */}
       <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
