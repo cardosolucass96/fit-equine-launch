@@ -8,15 +8,13 @@ const Footer = () => {
         <div className="grid lg:grid-cols-4 gap-8">
           {/* Logo and Company Info */}
           <div className="lg:col-span-2">
-            <div className="mb-6">
-              <h3 className="text-2xl font-montserrat font-bold text-turquoise mb-2">
-                INTEGRAL MIX
-              </h3>
+            <div className="mb-6 flex flex-col items-start">
               <img
                 src="https://integralmix.com.br/wp-content/themes/integral/assets/images/logo.svg"
-                alt="alimentando o futuro"
-                className="h-6"
+                alt="Integral Mix"
+                className="h-8"
               />
+              <p className="text-gray-400 text-sm mt-2">alimentando o futuro</p>
             </div>
 
             <div className="space-y-3">
@@ -108,7 +106,7 @@ const Footer = () => {
         <div className="border-t border-gray-800 pt-8 mt-12">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-gray-400 text-sm">
-              © 2024 Integral MIX. Todos os direitos reservados.
+              © {new Date().getFullYear()} Integral MIX. Todos os direitos reservados.
             </p>
             <p className="text-gray-400 text-sm">
               Performance FIT - Desenvolvido com ciência para cavalos excepcionais

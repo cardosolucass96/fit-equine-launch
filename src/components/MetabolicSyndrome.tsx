@@ -52,13 +52,11 @@ const MetabolicSyndrome = () => {
               </div>
             </div>
 
-            <Button 
+            <Button
               onClick={handleDownload}
-              variant="outline"
-              className="border-turquoise text-turquoise hover:bg-turquoise hover:text-white font-montserrat font-semibold transition-all duration-300"
+              className="bg-turquoise hover:bg-turquoise-dark text-white font-montserrat font-semibold transition-all duration-300"
             >
-              <Download className="h-4 w-4 mr-2" />
-              Baixar artigo científico
+              Participar do grupo
             </Button>
           </div>
 

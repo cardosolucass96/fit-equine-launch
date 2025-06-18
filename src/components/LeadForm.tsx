@@ -26,10 +26,11 @@ const brazilianStates = [
 ];
 
 const professions = [
-  "ZOOTECNISTA",
-  "CRIADOR",
-  "VETERINARIO",
-  "COMPETIDOR",
+  "Zootecnista",
+  "Criador",
+  "Veterinario",
+  "Competidor",
+  "Outro",
 ];
 
 const formatWhatsApp = (value: string) => {
