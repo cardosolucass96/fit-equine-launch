@@ -64,7 +64,9 @@ const FAQ = () => {
               Entre em contato conosco pelo WhatsApp para falar diretamente com nossos especialistas.
             </p>
             <a
-              href="https://wa.me/5585991627588"
+              href={`https://wa.me/5585991627588?text=${encodeURIComponent(
+                'Olá, vim pela página da ração performance fit e queria saber mais'
+              )}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center bg-turquoise hover:bg-turquoise-dark text-white font-montserrat font-semibold px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105"

@@ -57,7 +57,9 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="https://wa.me/5585991627588"
+                  href={`https://wa.me/5585991627588?text=${encodeURIComponent(
+                    'Olá, vim pela página da ração performance fit e queria saber mais'
+                  )}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-turquoise transition-colors text-sm"
