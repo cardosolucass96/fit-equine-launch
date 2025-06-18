@@ -5,6 +5,9 @@
     { "path": "./tsconfig.node.json" }
   ],
   "compilerOptions": {
+    "moduleResolution": "node",
+    "types": ["@types/node", "@vercel/node"],
+    "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
