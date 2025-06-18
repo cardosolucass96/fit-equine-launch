@@ -63,13 +63,13 @@ const FAQ = () => {
             <p className="text-gray-600 mb-4">
               Entre em contato conosco pelo WhatsApp para falar diretamente com nossos especialistas.
             </p>
-            <a 
-              href="https://wa.me/5511999999999" 
-              target="_blank" 
+            <a
+              href="https://wa.me/5585991627588"
+              target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center bg-turquoise hover:bg-turquoise-dark text-white font-montserrat font-semibold px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105"
             >
-              Falar com especialista
+              Falar com especialista no WhatsApp
             </a>
           </div>
         </div>

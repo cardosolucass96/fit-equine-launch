@@ -1,36 +1,108 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import { cn } from "@/lib/utils";
+import { Check, ChevronsUpDown } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Clock, Users, ExternalLink } from "lucide-react";
 
 const brazilianStates = [
-  "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", 
-  "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", 
+  "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA",
+  "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN",
   "RS", "RO", "RR", "SC", "SP", "SE", "TO"
 ];
+
+const professions = [
+  "ZOOTECNISTA",
+  "CRIADOR",
+  "VETERINARIO",
+  "COMPETIDOR",
+];
+
+const formatWhatsApp = (value: string) => {
+  const digits = value.replace(/\D/g, '').slice(0, 11);
+  if (digits.length <= 2) return digits;
+  if (digits.length <= 6) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+  if (digits.length <= 10) {
+    return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
+  }
+  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+};
+
 
 const LeadForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     whatsapp: "",
-    crm: "",
+    profession: "",
     state: "",
-    lgpdConsent: false
+    city: "",
+    lgpdConsent: false,
   });
+  const [cities, setCities] = useState<string[]>([]);
+  const [isLoadingCities, setIsLoadingCities] = useState(false);
+  const [cityOpen, setCityOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { toast } = useToast();
 
+  useEffect(() => {
+    const uf = formData.state;
+    if (!uf) {
+      setCities([]);
+      return;
+    }
+
+    const cacheKey = `cities-${uf}`;
+    const cached = sessionStorage.getItem(cacheKey);
+    if (cached) {
+      setCities(JSON.parse(cached));
+      return;
+    }
+
+    const fetchCities = async () => {
+      setIsLoadingCities(true);
+      try {
+        const response = await fetch(
+          `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios?orderBy=nome`
+        );
+        const data = await response.json();
+        const names = data.map((c: { nome: string }) => c.nome);
+        setCities(names);
+        sessionStorage.setItem(cacheKey, JSON.stringify(names));
+      } catch (error) {
+        toast({
+          title: 'Erro',
+          description: 'Falha ao carregar cidades, tente novamente.',
+          variant: 'destructive',
+        });
+      } finally {
+        setIsLoadingCities(false);
+      }
+    };
+
+    fetchCities();
+  }, [formData.state, toast]);
+
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData(prev => ({
       ...prev,
-      [field]: value
+      [field]: value,
+      ...(field === 'state' && { city: '' })
     }));
   };
 
@@ -60,10 +132,22 @@ const LeadForm = () => {
           form_name: 'performance_fit_waitlist',
           user_data: {
             email: formData.email,
-            state: formData.state
+            state: formData.state,
+            city: formData.city
           }
         });
       }
+
+      // Send data to external webhook without additional validation
+      await fetch('https://webhook-n8n.grupovorp.com/webhook/integral-mix', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      }).catch((error) => {
+        console.error('Failed to send webhook', error);
+      });
 
       // Simulate API delay
       await new Promise(resolve => setTimeout(resolve, 1500));
@@ -106,12 +190,12 @@ const LeadForm = () => {
                 Clique no botão abaixo para entrar no grupo exclusivo de WhatsApp e receber 
                 todas as novidades sobre a Performance FIT em primeira mão.
               </p>
-              <Button 
+              <Button
                 onClick={handleWhatsAppRedirect}
                 className="bg-green-500 hover:bg-green-600 text-white font-montserrat font-semibold text-lg px-8 py-3"
               >
                 <ExternalLink className="h-5 w-5 mr-2" />
-                Entrar no grupo VIP
+                Entrar no grupo VIP do WhatsApp
               </Button>
             </div>
           </div>
@@ -189,24 +273,30 @@ const LeadForm = () => {
                   type="tel"
                   placeholder="(11) 99999-9999"
                   value={formData.whatsapp}
-                  onChange={(e) => handleInputChange('whatsapp', e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange('whatsapp', formatWhatsApp(e.target.value))
+                  }
                   className="h-12"
                   required
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="crm" className="font-montserrat font-semibold">
-                  CRM
+                <Label htmlFor="profession" className="font-montserrat font-semibold">
+                  Profissão
                 </Label>
-                <Input
-                  id="crm"
-                  type="text"
-                  placeholder="Número do CRM"
-                  value={formData.crm}
-                  onChange={(e) => handleInputChange('crm', e.target.value)}
-                  className="h-12"
-                />
+                <Select onValueChange={(value) => handleInputChange('profession', value)}>
+                  <SelectTrigger className="h-12">
+                    <SelectValue placeholder="Selecione sua profissão" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {professions.map((profession) => (
+                      <SelectItem key={profession} value={profession}>
+                        {profession}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             </div>
 
@@ -226,6 +316,57 @@ const LeadForm = () => {
                   ))}
                 </SelectContent>
               </Select>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="city" className="font-montserrat font-semibold">
+                Cidade
+              </Label>
+              <Popover open={cityOpen} onOpenChange={setCityOpen}>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    role="combobox"
+                    className="h-12 w-full justify-between"
+                    disabled={!formData.state || isLoadingCities}
+                  >
+                    {formData.city
+                      ? formData.city
+                      : isLoadingCities
+                        ? 'Carregando...'
+                        : 'Selecione sua cidade'}
+                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0">
+                  <Command>
+                    <CommandInput placeholder="Busque sua cidade..." />
+                    <CommandList>
+                      <CommandEmpty>Nenhuma cidade encontrada.</CommandEmpty>
+                      <CommandGroup>
+                        {cities.map((city) => (
+                          <CommandItem
+                            key={city}
+                            value={city}
+                            onSelect={(currentValue) => {
+                              handleInputChange('city', currentValue)
+                              setCityOpen(false)
+                            }}
+                          >
+                            <Check
+                              className={cn(
+                                'mr-2 h-4 w-4',
+                                formData.city === city ? 'opacity-100' : 'opacity-0'
+                              )}
+                            />
+                            {city}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
             </div>
 
             <div className="flex items-start space-x-2">
