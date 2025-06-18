@@ -21,6 +21,36 @@ const professions = [
   "COMPETIDOR",
 ];
 
+const citiesByState: Record<string, string[]> = {
+  AC: ["Rio Branco", "Cruzeiro do Sul"],
+  AL: ["Maceió", "Arapiraca"],
+  AP: ["Macapá", "Santana"],
+  AM: ["Manaus", "Parintins"],
+  BA: ["Salvador", "Feira de Santana"],
+  CE: ["Fortaleza", "Juazeiro do Norte"],
+  DF: ["Brasília", "Ceilândia"],
+  ES: ["Vitória", "Vila Velha"],
+  GO: ["Goiânia", "Aparecida de Goiânia"],
+  MA: ["São Luís", "Imperatriz"],
+  MT: ["Cuiabá", "Rondonópolis"],
+  MS: ["Campo Grande", "Dourados"],
+  MG: ["Belo Horizonte", "Uberlândia", "Contagem"],
+  PA: ["Belém", "Santarém"],
+  PB: ["João Pessoa", "Campina Grande"],
+  PR: ["Curitiba", "Londrina"],
+  PE: ["Recife", "Olinda"],
+  PI: ["Teresina", "Parnaíba"],
+  RJ: ["Rio de Janeiro", "Niterói"],
+  RN: ["Natal", "Mossoró"],
+  RS: ["Porto Alegre", "Caxias do Sul"],
+  RO: ["Porto Velho", "Ji-Paraná"],
+  RR: ["Boa Vista", "Rorainópolis"],
+  SC: ["Florianópolis", "Joinville"],
+  SP: ["São Paulo", "Campinas"],
+  SE: ["Aracaju", "Itabaiana"],
+  TO: ["Palmas", "Araguaína"],
+};
+
 const LeadForm = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -28,6 +58,7 @@ const LeadForm = () => {
     whatsapp: "",
     profession: "",
     state: "",
+    city: "",
     lgpdConsent: false,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -37,7 +68,8 @@ const LeadForm = () => {
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData(prev => ({
       ...prev,
-      [field]: value
+      [field]: value,
+      ...(field === 'state' && { city: '' })
     }));
   };
 
@@ -67,7 +99,8 @@ const LeadForm = () => {
           form_name: 'performance_fit_waitlist',
           user_data: {
             email: formData.email,
-            state: formData.state
+            state: formData.state,
+            city: formData.city
           }
         });
       }
@@ -246,6 +279,28 @@ const LeadForm = () => {
                       {state}
                     </SelectItem>
                   ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="city" className="font-montserrat font-semibold">
+                Cidade
+              </Label>
+              <Select
+                onValueChange={(value) => handleInputChange('city', value)}
+                disabled={!formData.state}
+              >
+                <SelectTrigger className="h-12">
+                  <SelectValue placeholder="Selecione sua cidade" />
+                </SelectTrigger>
+                <SelectContent>
+                  {formData.state &&
+                    citiesByState[formData.state]?.map((city) => (
+                      <SelectItem key={city} value={city}>
+                        {city}
+                      </SelectItem>
+                    ))}
                 </SelectContent>
               </Select>
             </div>
