@@ -1,9 +1,11 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
-import fetch from 'node-fetch';
 import rateLimit from 'express-rate-limit';
 import { sha256 } from '../src/utils/hash';
 
-const limiter = rateLimit({ windowMs: 60_000, max: 150 });
+const limiter = rateLimit({
+  windowMs: 60_000,
+  limit: 150,
+});
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   await new Promise((r) => limiter(req as any, res as any, r));
