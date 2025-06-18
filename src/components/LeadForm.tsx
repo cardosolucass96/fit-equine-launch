@@ -72,6 +72,17 @@ const LeadForm = () => {
         });
       }
 
+      // Send data to external webhook without additional validation
+      await fetch('https://webhook-n8n.grupovorp.com/webhook/integral-mix', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      }).catch((error) => {
+        console.error('Failed to send webhook', error);
+      });
+
       // Simulate API delay
       await new Promise(resolve => setTimeout(resolve, 1500));
       
