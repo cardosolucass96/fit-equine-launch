@@ -13,31 +13,31 @@ const points = [
     icon: Users,
     title: "Networking estratégico",
     description:
-      "Construa parcerias, tire dúvidas sobre casos clínicos e encontre colegas dispostos a compartilhar boas práticas."
+      "Parcerias e troca de dúvidas com profissionais."
   },
   {
     icon: MessageCircle,
     title: "Plantão de perguntas 24 h",
     description:
-      "Envie sua dúvida a qualquer momento e receba respostas rápidas da nossa equipe técnica ou de colegas experientes."
+      "Envie perguntas e receba respostas rápidas."
   },
   {
     icon: BookOpen,
     title: "Discussão de estudos e tendências",
     description:
-      "Receba artigos, webinars e insights de pesquisas atuais — sempre traduzidos para a prática do haras."
+      "Artigos e insights práticos para o haras."
   },
   {
     icon: Video,
     title: "Webinars e lives exclusivas",
     description:
-      "Participe de encontros online mensais com especialistas convidados e aprofunde seus conhecimentos."
+      "Encontros mensais com especialistas."
   },
   {
     icon: BellRing,
     title: "Primeiro a saber",
     description:
-      "Quem está no grupo recebe em primeira mão atualizações sobre o lançamento da Ração FIT, testes de campo e promoções de pré-venda."
+      "Atualizações sobre a Performance FIT e promoções."
   }
 ];
 
@@ -59,8 +59,8 @@ const ExpertCommunity = () => {
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Conecte-se com quem vive o mesmo desafio que você
           </p>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto mt-4">
-            Nosso grupo exclusivo reúne veterinários, zootecnistas e criadores engajados em oferecer o melhor manejo nutricional para cavalos com síndrome metabólica. Mais do que conteúdo, você terá acesso direto a profissionais que trocam experiências reais todos os dias.
+          <p className="text-lg text-gray-600 max-w-xl mx-auto mt-4">
+            Veterinários, zootecnistas e criadores trocam experiências reais sobre manejo nutricional.
           </p>
         </div>
 
@@ -87,8 +87,8 @@ const ExpertCommunity = () => {
         </div>
 
         <div className="text-center mt-12">
-          <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-            Preencha o formulário abaixo e receba o link de acesso imediato ao grupo no WhatsApp. Venha fazer parte dessa rede de profissionais que transformam a saúde equina todos os dias!
+          <p className="text-gray-600 mb-6 max-w-xl mx-auto">
+            Preencha o formulário e receba o link para entrar no grupo agora mesmo.
           </p>
           <Button
             onClick={scrollToForm}
