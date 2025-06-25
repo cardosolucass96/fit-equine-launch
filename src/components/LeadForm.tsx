@@ -100,7 +100,7 @@ const LeadForm = () => {
   const handleWhatsAppRedirect = () => {
     // Redirect to WhatsApp group after 1.5s delay
     setTimeout(() => {
-      window.open('https://chat.whatsapp.com/grupowhatsapp.fit', '_blank');
+      window.open('https://chat.whatsapp.com/JanwPMutc0t2wjwMAROT1P', '_blank');
     }, 1500);
   };
 
