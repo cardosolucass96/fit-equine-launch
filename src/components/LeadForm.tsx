@@ -67,6 +67,14 @@ const LeadForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { toast } = useToast();
 
+  // Scroll to the success message when the form is submitted
+  useEffect(() => {
+    if (isSubmitted) {
+      const section = document.getElementById('lead-form');
+      section?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [isSubmitted]);
+
   // Capture UTM parameters on load
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -210,7 +218,7 @@ const LeadForm = () => {
   const handleWhatsAppRedirect = () => {
     // Redirect to WhatsApp group after 1.5s delay
     setTimeout(() => {
-      window.open('https://chat.whatsapp.com/grupowhatsapp.fit', '_blank');
+      window.open('https://chat.whatsapp.com/JanwPMutc0t2wjwMAROT1P', '_blank');
     }, 1500);
   };
 
