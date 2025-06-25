@@ -67,6 +67,14 @@ const LeadForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { toast } = useToast();
 
+  // Scroll to the success message when the form is submitted
+  useEffect(() => {
+    if (isSubmitted) {
+      const section = document.getElementById('lead-form');
+      section?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [isSubmitted]);
+
   // Capture UTM parameters on load
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
