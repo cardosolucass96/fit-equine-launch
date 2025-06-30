@@ -201,7 +201,7 @@ const LeadForm = () => {
       setIsSubmitted(true);
       toast({
         title: "Sucesso!",
-        description: "Seus dados foram enviados. Clique no botão abaixo para entrar no grupo WhatsApp.",
+        description: "Seus dados foram enviados. Clique no botão abaixo para saber mais sobre a sindrome metabólica e como tratá-la.",
       });
 
     } catch (error) {
@@ -233,15 +233,15 @@ const LeadForm = () => {
                 Obrigado! Você está na lista VIP
               </h3>
               <p className="text-gray-600 mb-6">
-                Clique no botão abaixo para entrar no grupo exclusivo de WhatsApp e receber 
-                todas as novidades sobre a Performance FIT em primeira mão.
+                Clique no botão abaixo para entrar em contato e receber
+                todas as novidades sobre síndrome metabólica e como tratá-la em primeira mão.
               </p>
               <Button
                 onClick={handleWhatsAppRedirect}
                 className="bg-green-500 hover:bg-green-600 text-white font-montserrat font-semibold text-lg px-8 py-3"
               >
                 <ExternalLink className="h-5 w-5 mr-2" />
-                Entrar no grupo VIP do WhatsApp
+                Saber mais
               </Button>
             </div>
           </div>
@@ -256,7 +256,7 @@ const LeadForm = () => {
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-montserrat font-bold text-gray-900 mb-6">
-              Entre para a lista VIP e receba acesso ao nosso grupo exclusivo
+              Entre para a lista VIP e receba todas as novidades
             </h2>
             <p className="text-lg text-gray-600 mb-8">
               Seja o primeiro a saber sobre o lançamento da Performance FIT e tenha acesso 
@@ -271,7 +271,7 @@ const LeadForm = () => {
               </div>
               <div className="flex items-center gap-2 text-turquoise">
                 <Users className="h-5 w-5" />
-                <span className="font-montserrat font-semibold">Vagas limitadas no grupo</span>
+                <span className="font-montserrat font-semibold">Vagas limitada</span>
               </div>
             </div>
           </div>
@@ -447,7 +447,7 @@ const LeadForm = () => {
             </Button>
 
             <p className="text-center text-sm text-gray-500 mt-4">
-              <strong className="text-turquoise">Vagas limitadas no grupo.</strong> Garante seu lugar antes do simpósio!
+              <strong className="text-turquoise">Vagas limitadas.</strong> Garante seu lugar antes do simpósio!
             </p>
           </form>
         </div>

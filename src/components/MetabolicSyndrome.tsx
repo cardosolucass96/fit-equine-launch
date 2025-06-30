@@ -56,7 +56,7 @@ const MetabolicSyndrome = () => {
               onClick={handleDownload}
               className="bg-turquoise hover:bg-turquoise-dark text-white font-montserrat font-semibold transition-all duration-300"
             >
-              Participar do grupo
+              Saber mais
             </Button>
           </div>
 

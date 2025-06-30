@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import Hero from "@/components/Hero";
 import Benefits from "@/components/Benefits";
 import MetabolicSyndrome from "@/components/MetabolicSyndrome";
-import ExpertCommunity from "@/components/TechnicalLibrary";
 import LeadForm from "@/components/LeadForm";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
@@ -21,7 +20,6 @@ const Index = () => {
         <Hero />
         <Benefits />
         <MetabolicSyndrome />
-        <ExpertCommunity />
         <LeadForm />
         <FAQ />
       </main>

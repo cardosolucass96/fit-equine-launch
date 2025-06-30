@@ -39,7 +39,7 @@ const Hero = () => {
           className="bg-turquoise hover:bg-turquoise-dark text-white font-montserrat font-semibold text-lg px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-105 animate-fade-in delay-700"
           size="lg"
         >
-          Entrar no grupo do WhatsApp
+          Saber mais
         </Button>
       </div>
 
