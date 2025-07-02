@@ -17,13 +17,12 @@ const MetabolicSyndrome = () => {
           <div className="space-y-6">
             {/* Text Content */}
             <h2 className="text-3xl md:text-4xl font-montserrat font-bold text-gray-900 leading-tight">
-              Saúde metabólica: 
-              <span className="text-turquoise"> Melhora da sensibilidade à insulina e redução do estresse oxidativo</span>
+              Síndrome metabólica Equina: 
+              <span className="text-turquoise"> Desafio nutricional</span>
             </h2>
             
             <p className="text-lg text-gray-600 leading-relaxed">
-              A síndrome metabólica equina afeta milhões de cavalos globalmente, caracterizada por 
-              resistência à insulina, obesidade regional e laminite recorrente.
+              A síndrome metabólica equina afeta milhões de cavalos globalmente, caracterizada por resistência à insulina, obesidade regional e laminite recorrente.
             </p>
 
             <div className="space-y-4">
@@ -40,6 +39,14 @@ const MetabolicSyndrome = () => {
                 <div>
                   <h4 className="font-montserrat font-semibold text-gray-900 mb-2">Prevenção de Laminite</h4>
                   <p className="text-gray-600">Protocolo nutricional específico para reduzir riscos inflamatórios.</p>
+                </div>
+              </div>
+                            
+              <div className="flex items-start gap-4">
+                <Heart className="h-6 w-6 text-turquoise mt-1 flex-shrink-0" />
+                <div>
+                  <h4 className="font-montserrat font-semibold text-gray-900 mb-2">Saúde metabólica</h4>
+                  <p className="text-gray-600">Melhora da sensibilidade à insulina e redução do estresse oxidativo.</p>
                 </div>
               </div>
             </div>
@@ -162,6 +169,6 @@ const MetabolicSyndrome = () => {
       </div>
     </section>
   );
-};
+}
 
 export default MetabolicSyndrome;
