@@ -164,13 +164,6 @@ const IngredientsSection = () => {
                     </tbody>
                   </table>
                 </div>
-                
-                <div className="mt-6 p-4 bg-turquoise/10 rounded-lg">
-                  <p className="text-sm text-gray-600 text-center">
-                    Valores garantidos por análises laboratoriais realizadas conforme metodologias oficiais. 
-                    Produto registrado no Ministério da Agricultura.
-                  </p>
-                </div>
               </CardContent>
             </Card>
           </TabsContent>
