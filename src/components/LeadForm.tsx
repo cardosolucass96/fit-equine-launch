@@ -236,13 +236,6 @@ const LeadForm = () => {
                 Clique no botão abaixo para entrar em contato e receber
                 todas as novidades sobre síndrome metabólica e como tratá-la em primeira mão.
               </p>
-              <Button
-                onClick={handleWhatsAppRedirect}
-                className="bg-green-500 hover:bg-green-600 text-white font-montserrat font-semibold text-lg px-8 py-3"
-              >
-                <ExternalLink className="h-5 w-5 mr-2" />
-                Saber mais
-              </Button>
             </div>
           </div>
         </div>
