@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Waves, Zap, Dna } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const IngredientsSection = () => {
   const compositionData = [
@@ -29,9 +29,10 @@ const IngredientsSection = () => {
         </div>
 
         <Tabs defaultValue="ingredients" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 mb-8 bg-turquoise/10 rounded-lg p-1">
-            <TabsTrigger value="ingredients" className="data-[state=active]:bg-turquoise data-[state=active]:text-white font-montserrat text-turquoise">Ingredientes Funcionais</TabsTrigger>
-            <TabsTrigger value="composition" className="data-[state=active]:bg-turquoise data-[state=active]:text-white font-montserrat text-turquoise">Composição Garantida</TabsTrigger>
+          {/* TabsList oculto mas mantido no código para fácil reexibição */}
+          <TabsList className="hidden">
+            <TabsTrigger value="ingredients">Ingredientes Funcionais</TabsTrigger>
+            <TabsTrigger value="composition">Composição Garantida</TabsTrigger>
           </TabsList>
 
           <TabsContent value="ingredients" className="space-y-8">
@@ -132,10 +133,12 @@ const IngredientsSection = () => {
             </div>
           </TabsContent>
 
+          {/* TabsContent de composição garantida segue comentado */}
+          {/*
           <TabsContent value="composition">
             <Card className="border-turquoise/30 bg-white/90">
               <CardHeader>
-                <CardTitle className="text-2xl text-center font-montserrat text-gray-900">
+                <CardTitle className="text-2xl text-center font-montserrat text-turquoise">
                   Composição Garantida (por kg de produto)
                 </CardTitle>
               </CardHeader>
@@ -164,9 +167,17 @@ const IngredientsSection = () => {
                     </tbody>
                   </table>
                 </div>
+                
+                <div className="mt-6 p-4 bg-turquoise/10 rounded-lg">
+                  <p className="text-sm text-gray-600 text-center">
+                    Valores garantidos por análises laboratoriais realizadas conforme metodologias oficiais. 
+                    Produto registrado no Ministério da Agricultura.
+                  </p>
+                </div>
               </CardContent>
             </Card>
           </TabsContent>
+          */}
         </Tabs>
       </div>
     </section>
