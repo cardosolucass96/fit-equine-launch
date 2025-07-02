@@ -19,7 +19,7 @@ const IngredientsSection = () => {
     <section id="ingredientes" className="py-20 bg-gradient-to-b from-turquoise/10 via-white to-turquoise/5">
       <div className="container max-w-7xl mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-montserrat font-bold mb-4 text-turquoise">
+          <h2 className="text-3xl md:text-4xl font-montserrat font-bold mb-4 text-gray-900">
             Ingredientes Funcionais e Composição Garantida
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
@@ -39,11 +39,11 @@ const IngredientsSection = () => {
               <Card className="border-turquoise/30 shadow-none hover:shadow-lg hover:shadow-turquoise/10 transition-all duration-300 bg-white/90">
                 <CardHeader>
                   <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 bg-gradient-to-br from-turquoise to-turquoise-dark rounded-lg flex items-center justify-center">
+                    <div className="w-12 h-12  bg-turquoise rounded-lg flex items-center justify-center">
                       <Waves className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <CardTitle className="text-xl font-montserrat text-turquoise-dark">Lithothamnium sp.</CardTitle>
+                      <CardTitle className="text-xl font-montserrat text-gray-900">Lithothamnium sp.</CardTitle>
                       <Badge variant="secondary" className="mt-1 bg-turquoise/10 text-turquoise">Alga Calcária Marinha</Badge>
                     </div>
                   </div>
@@ -70,11 +70,11 @@ const IngredientsSection = () => {
               <Card className="border-turquoise/30 shadow-none hover:shadow-lg hover:shadow-turquoise/10 transition-all duration-300 bg-white/90">
                 <CardHeader>
                   <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 bg-gradient-to-br from-turquoise to-turquoise-dark rounded-lg flex items-center justify-center">
+                    <div className="w-12 h-12  bg-turquoise rounded-lg flex items-center justify-center">
                       <Zap className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <CardTitle className="text-xl font-montserrat text-turquoise-dark">Cromo Orgânico</CardTitle>
+                      <CardTitle className="text-xl font-montserrat text-gray-900">Cromo Orgânico</CardTitle>
                       <Badge variant="secondary" className="mt-1 bg-turquoise/10 text-turquoise">Mineral Quelatado</Badge>
                     </div>
                   </div>
@@ -102,11 +102,11 @@ const IngredientsSection = () => {
               <Card className="border-turquoise/30 shadow-none hover:shadow-lg hover:shadow-turquoise/10 transition-all duration-300 bg-white/90">
                 <CardHeader>
                   <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 bg-gradient-to-br from-turquoise to-turquoise-dark rounded-lg flex items-center justify-center">
+                    <div className="w-12 h-12  bg-turquoise rounded-lg flex items-center justify-center">
                       <Dna className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <CardTitle className="text-xl font-montserrat text-turquoise-dark">Aminoácidos Essenciais</CardTitle>
+                      <CardTitle className="text-xl font-montserrat text-gray-900">Aminoácidos Essenciais</CardTitle>
                       <Badge variant="secondary" className="mt-1 bg-turquoise/10 text-turquoise">Síntese Proteica</Badge>
                     </div>
                   </div>
@@ -135,7 +135,7 @@ const IngredientsSection = () => {
           <TabsContent value="composition">
             <Card className="border-turquoise/30 bg-white/90">
               <CardHeader>
-                <CardTitle className="text-2xl text-center font-montserrat text-turquoise">
+                <CardTitle className="text-2xl text-center font-montserrat text-gray-900">
                   Composição Garantida (por kg de produto)
                 </CardTitle>
               </CardHeader>
