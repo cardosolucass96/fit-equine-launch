@@ -73,7 +73,7 @@ const MetabolicSyndrome = () => {
                 <span className="text-gray-600">Cavalos de lazer na Escócia<sup>(2)</sup></span>
                 <div className="flex items-center gap-3">
                   <div className="w-32 h-3 bg-gray-200 rounded-full overflow-hidden">
-                    <div className="w-3/4 h-full bg-turquoise rounded-full"></div>
+                    <div className="w-full h-full bg-turquoise rounded-full"></div>
                   </div>
                   <span className="font-montserrat font-bold text-gray-900 w-12">45%</span>
                 </div>
@@ -123,7 +123,7 @@ const MetabolicSyndrome = () => {
                   <div className="w-32 h-3 bg-gray-200 rounded-full overflow-hidden">
                     <div className="w-3/4 h-full bg-turquoise rounded-full"></div>
                   </div>
-                  <span className="font-montserrat font-bold text-gray-900 w-12">31,25%</span>
+                  <span className="font-montserrat font-bold text-gray-900 w-12">27%</span>
                 </div>
               </div>
 
@@ -131,9 +131,9 @@ const MetabolicSyndrome = () => {
                 <span className="text-gray-600">Equinos em Ohio<sup>(2)</sup></span>
                 <div className="flex items-center gap-3">
                   <div className="w-32 h-3 bg-gray-200 rounded-full overflow-hidden">
-                    <div className="w-29 h-full bg-turquoise rounded-full"></div>
+                    <div className="w-2/5 h-full bg-turquoise rounded-full"></div>
                   </div>
-                  <span className="font-montserrat font-bold text-gray-900 w-12">45%</span>
+                  <span className="font-montserrat font-bold text-gray-900 w-12">22,3%</span>
                 </div>
               </div>
 
