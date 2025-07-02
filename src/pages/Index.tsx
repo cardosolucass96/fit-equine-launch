@@ -6,6 +6,7 @@ import MetabolicSyndrome from "@/components/MetabolicSyndrome";
 import LeadForm from "@/components/LeadForm";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
+import TechnicalLibrary from "@/components/TechnicalLibrary";
 
 const Index = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -20,6 +21,7 @@ const Index = () => {
         <Hero />
         <Benefits />
         <MetabolicSyndrome />
+        <TechnicalLibrary />
         <LeadForm />
         <FAQ />
       </main>

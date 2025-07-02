@@ -9,19 +9,15 @@ import {
 const faqItems = [
   {
     question: "Quando a Performance FIT estará disponível no mercado?",
-    answer: "O lançamento oficial da Performance FIT está previsto para julho de 2025. Os participantes da lista VIP serão os primeiros a ter acesso ao produto e receberão condições especiais de pré-venda."
+    answer: "O lançamento oficial da Performance FIT está previsto para agosto de 2025. Os participantes da lista VIP serão os primeiros a ter acesso ao produto e receberão condições especiais de pré-venda."
   },
   {
     question: "Para quais tipos de cavalos a Performance FIT é indicada?",
     answer: "A Performance FIT foi especialmente desenvolvida para cavalos com síndrome metabólica, resistência à insulina, cavalos com tendência à obesidade e aqueles propensos à laminite. É indicada para cavalos de esporte, lazer e reprodução que necessitam de controle rigoroso de açúcares e amido."
   },
   {
-    question: "Como posso ter certeza da eficácia do produto?",
-    answer: "A Performance FIT passou por rigorosos testes clínicos com cavalos Puro Sangue Inglês, demonstrando melhora significativa nos parâmetros metabólicos. Disponibilizamos estudos científicos, artigos técnicos e suporte veterinário especializado para todos os usuários."
-  },
-  {
     question: "Qual suporte técnico será oferecido?",
-    answer: "Oferecemos suporte técnico completo através do nosso time de veterinários especializados em nutrição equina. Isso inclui orientação sobre dosagem, transição alimentar, monitoramento de resultados e acesso a materiais técnicos exclusivos via WhatsApp e webinars mensais."
+    answer: "Oferecemos suporte técnico completo por meio do nosso time especializado em nutrição equina. Isso inclui orientação sobre quantidade de ração, outros alimentos da dieta, transição alimentar, exercícios físicos, exames laboratoriais, monitoramento de resultados e acesso a materiais técnicos exclusivos via WhatsApp e webinars."
   }
 ];
 

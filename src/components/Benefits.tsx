@@ -12,32 +12,32 @@ const benefits = [
   {
     icon: Zap,
     title: "Baixo Amido",
-    description: "Menos picos de glicose, mais energia estável. A fórmula FIT reduz o amido sem sacrificar desempenho."
+    description: "Menos picos de glicose, mais energia estável e segura. A fórmula FIT reduz o amido sem comprometer o desempenho."
   },
   {
     icon: ShieldCheck,
     title: "Zero Melaço",
-    description: "Controle total de açúcares para cavalos com síndrome metabólica e resistência à insulina."
+    description: "Fórmula sem adição de açúcares, ideal para cavalos com distúrbios metabólicos."
   },
   {
     icon: Heart,
     title: "Antioxidantes",
-    description: "Proteção celular avançada com vitaminas E, C e selênio para máxima performance."
+    description: "Com vitaminas C, E e Selênio para proteção avançada contra o estresse oxidativo presente na obesidade e doenças metabólicas."
   },
   {
     icon: Sparkles,
     title: "Pré & Probióticos",
-    description: "Microbiota intestinal equilibrada para melhor digestão e absorção de nutrientes."
+    description: "Microbiota intestinal equilibrada para maior absorção de nutrientes e segurança alimentar."
   },
   {
     icon: Leaf,
     title: "Alfafa Peletizada",
-    description: "Fonte de fibra de alta qualidade, processada para máxima digestibilidade."
+    description: "Fonte de proteína de qualidade e fibra funcional com ação tamponante para o trato gastrointestinal."
   },
   {
     icon: Wheat,
     title: "Fibras Alta Digestibilidade",
-    description: "Energia sustentada através de fibras fermentescíveis premium."
+    description: "Energia sustentada por fibras de alta fermentabilidade e baixo índice glicêmico."
   }
 ];
 
@@ -50,7 +50,7 @@ const Benefits = () => {
             Tecnologia Avançada em Nutrição Equina
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Performance FIT foi desenvolvida especificamente para cavalos com síndrome metabólica, 
+            Performance FIT foi desenvolvida especificamente para cavalos obesos ou com síndrome metabólica, 
             oferecendo nutrição completa sem comprometer a saúde gastrointestinal.
           </p>
         </div>
@@ -92,8 +92,8 @@ const Benefits = () => {
             <div className="text-gray-600 font-semibold">Artigos Técnicos</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-montserrat font-bold text-turquoise mb-2">100%</div>
-            <div className="text-gray-600 font-semibold">Natural</div>
+            <div className="text-3xl font-montserrat font-bold text-turquoise mb-2">+Saúde</div>
+            <div className="text-gray-600 font-semibold">Metabólica e Digestiva</div>
           </div>
         </div>
       </div>

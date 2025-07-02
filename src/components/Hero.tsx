@@ -31,7 +31,7 @@ const Hero = () => {
         </h2>
         
         <p className="text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed animate-fade-in delay-500">
-          FIT une ciência de ponta e ingredientes de alta digestibilidade para cavalos com síndrome metabólica
+          FIT une ciência de ponta e ingredientes de alta digestibilidade para cavalos obesos ou com síndrome metabólica
         </p>
         
         <Button
