@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { v4 as uuid } from "uuid";
 import { Button } from "@/components/ui/button";
@@ -236,6 +235,13 @@ const LeadForm = () => {
                 Clique no botão abaixo para entrar em contato e receber
                 todas as novidades sobre síndrome metabólica e como tratá-la em primeira mão.
               </p>
+              <Button
+                onClick={handleWhatsAppRedirect}
+                className="bg-green-500 hover:bg-green-600 text-white font-montserrat font-semibold text-lg px-8 py-3 flex items-center justify-center mx-auto"
+              >
+                <ExternalLink className="h-5 w-5 mr-2" />
+                Entrar no grupo do WhatsApp
+              </Button>
             </div>
           </div>
         </div>
@@ -436,7 +442,7 @@ const LeadForm = () => {
               disabled={isSubmitting}
               className="w-full bg-turquoise hover:bg-turquoise-dark text-white font-montserrat font-semibold text-lg py-4 h-auto transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:transform-none"
             >
-              {isSubmitting ? 'Aguarde...' : 'Aguardar novidades'}
+              {isSubmitting ? 'Aguarde...' : 'Entrar no grupo VIP do WhatsApp'}
             </Button>
 
             <p className="text-center text-sm text-gray-500 mt-4">
