@@ -215,7 +215,7 @@ const LeadForm = () => {
   };
 
   const handleWhatsAppRedirect = () => {
-    window.location.href = 'https://chat.whatsapp.com/JanwPMutc0t2wjwMAROT1P';
+    window.location.href = 'https://chat.whatsapp.com/EgHuDBVCRS07voLEWSGp5c';
   };
 
   if (isSubmitted) {
