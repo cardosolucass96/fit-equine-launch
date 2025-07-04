@@ -215,10 +215,7 @@ const LeadForm = () => {
   };
 
   const handleWhatsAppRedirect = () => {
-    // Redirect to WhatsApp group after 1.5s delay
-    setTimeout(() => {
-      window.open('https://chat.whatsapp.com/JanwPMutc0t2wjwMAROT1P', '_blank');
-    }, 1500);
+    window.location.href = 'https://chat.whatsapp.com/JanwPMutc0t2wjwMAROT1P';
   };
 
   if (isSubmitted) {
@@ -237,7 +234,7 @@ const LeadForm = () => {
               </p>
               <Button
                 onClick={handleWhatsAppRedirect}
-                className="bg-green-500 hover:bg-green-600 text-white font-montserrat font-semibold text-lg px-8 py-3 flex items-center justify-center mx-auto"
+                className="bg-green-500 hover:bg-green-600 text-white font-montserrat font-semibold text-lg px-6 py-3 w-full max-w-xs mx-auto flex items-center justify-center transition-all duration-200"
               >
                 <ExternalLink className="h-5 w-5 mr-2" />
                 Entrar no grupo do WhatsApp
