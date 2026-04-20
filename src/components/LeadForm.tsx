@@ -149,7 +149,7 @@ const LeadForm = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-8">
               <div className="flex items-center gap-2 text-turquoise">
                 <Clock className="h-5 w-5" />
-                <span className="font-montserrat font-semibold">Lançamento em Jul/2025</span>
+                <span className="font-montserrat font-semibold">Lançamento em 04/05/2026</span>
               </div>
               <div className="flex items-center gap-2 text-turquoise">
                 <Users className="h-5 w-5" />

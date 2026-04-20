@@ -9,7 +9,7 @@ import {
 const faqItems = [
   {
     question: "Quando a Performance FIT estará disponível no mercado?",
-    answer: "O lançamento oficial da Performance FIT está previsto para julho de 2025. Os participantes da lista VIP serão os primeiros a ter acesso ao produto e receberão condições especiais de pré-venda."
+    answer: "O lançamento oficial da Performance FIT está previsto para 04/05/2026. Os participantes da lista VIP serão os primeiros a ter acesso ao produto e receberão condições especiais de pré-venda."
   },
   {
     question: "Para quais tipos de cavalos a Performance FIT é indicada?",
