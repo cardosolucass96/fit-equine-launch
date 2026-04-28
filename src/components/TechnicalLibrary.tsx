@@ -22,7 +22,7 @@ const libraryItems = [
     description: "Demonstração prática de como balancear rações para cavalos com síndrome metabólica.",
     duration: "2 min",
     category: "Vídeos",
-    thumbnail: "https://images.unsplash.com/photo-1588059373266-3dc7b7a33a15?q=80&w=1974&auto=format&fit=crop",
+    thumbnail: "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?q=80&w=2070&auto=format&fit=crop",
     icon: Play
   },
   {
@@ -32,7 +32,7 @@ const libraryItems = [
     description: "Estudo de caso com 12 cavalos Puro Sangue Inglês demonstrando melhora dos parâmetros metabólicos.",
     duration: "8 min leitura",
     category: "Estudos",
-    thumbnail: "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?q=80&w=2070&auto=format&fit=crop",
+    thumbnail: "https://images.unsplash.com/photo-1580910051074-3877dddc1a8d?q=80&w=2070&auto=format&fit=crop",
     icon: BarChart3
   }
 ];
