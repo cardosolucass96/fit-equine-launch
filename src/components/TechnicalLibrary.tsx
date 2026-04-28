@@ -32,7 +32,7 @@ const libraryItems = [
     description: "Estudo de caso com 12 cavalos Puro Sangue Inglês demonstrando melhora dos parâmetros metabólicos.",
     duration: "8 min leitura",
     category: "Estudos",
-    thumbnail: "https://images.unsplash.com/photo-1580910051074-3877dddc1a8d?q=80&w=2070&auto=format&fit=crop",
+    thumbnail: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=2070&auto=format&fit=crop",
     icon: BarChart3
   }
 ];
