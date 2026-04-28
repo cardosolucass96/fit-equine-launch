@@ -12,7 +12,7 @@ const libraryItems = [
     description: "Revisão completa sobre estratégias nutricionais para cavalos com resistência à insulina.",
     duration: "15 min leitura",
     category: "Artigos",
-    thumbnail: "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?q=80&w=2070&auto=format&fit=crop",
+    thumbnail: "https://images.unsplash.com/photo-1598974357801-cbca100e65d3?q=80&w=2070&auto=format&fit=crop",
     icon: FileText
   },
   {
@@ -32,7 +32,7 @@ const libraryItems = [
     description: "Estudo de caso com 12 cavalos Puro Sangue Inglês demonstrando melhora dos parâmetros metabólicos.",
     duration: "8 min leitura",
     category: "Estudos",
-    thumbnail: "https://images.unsplash.com/photo-1579642840209-c93f2c1f21e2?q=80&w=2070&auto=format&fit=crop",
+    thumbnail: "https://images.unsplash.com/photo-1694446942933-bc29e37df9f3?q=80&w=2070&auto=format&fit=crop",
     icon: BarChart3
   }
 ];
