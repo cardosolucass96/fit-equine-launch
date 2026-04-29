@@ -5,40 +5,66 @@ import {
   Heart, 
   Leaf,
   Wheat,
-  Sparkles
+  Sparkles,
+  FlaskConical,
+  Scale,
+  Activity
 } from "lucide-react";
 
 const benefits = [
   {
     icon: Zap,
     title: "Baixo Amido",
-    description: "Menos picos de glicose, mais energia estável. A fórmula FIT reduz o amido sem sacrificar desempenho."
+    description: "Reduz picos de glicose e insulina, com mais segurança metabólica."
   },
   {
     icon: ShieldCheck,
     title: "Zero Melaço",
-    description: "Controle total de açúcares para cavalos com síndrome metabólica e resistência à insulina."
+    description: "Controle de carboidratos não estruturais para cavalos sensíveis, como animais com gastrites recorrentes, resistência à insulina e obesidade."
   },
   {
     icon: Heart,
     title: "Antioxidantes",
-    description: "Proteção celular avançada com vitaminas E, C e selênio para máxima performance."
+    description: "Enriquecida com vitaminas E e C e selênio, para proteção contra estresse oxidativo."
   },
   {
     icon: Sparkles,
     title: "Pré & Probióticos",
-    description: "Microbiota intestinal equilibrada para melhor digestão e absorção de nutrientes."
+    description: "Atuam no equilíbrio da microbiota intestinal e otimizam a digestibilidade de fibras."
   },
   {
     icon: Leaf,
     title: "Alfafa Peletizada",
-    description: "Fonte de fibra de alta qualidade, processada para máxima digestibilidade."
+    description: "Fonte de fibra funcional e proteína digestível com ação tamponante para o trato gastrointestinal."
   },
   {
     icon: Wheat,
-    title: "Fibras Alta Digestibilidade",
-    description: "Energia sustentada através de fibras fermentescíveis premium."
+    title: "Fibras de Alta Digestibilidade",
+    description: "Energia segura com saciedade e suporte à saúde gastrointestinal."
+  },
+  {
+    icon: FlaskConical,
+    title: "Lithothamnium sp.",
+    description: "Fonte de cálcio, magnésio e compostos bioativos com ação anti-inflamatória e efeito tamponante gástrico."
+  },
+  {
+    icon: Scale,
+    title: "Cromo Orgânico",
+    description: "Mineral associado à melhora da sensibilidade à insulina e ao metabolismo de glicose."
+  },
+  {
+    icon: Activity,
+    title: "Aminoácidos Essenciais",
+    description: "Auxiliam na preservação da massa muscular durante programas de controle de peso."
   }
+];
+
+const stats = [
+  { value: "0%", label: "Melaço" },
+  { value: ">14%", label: "Proteína Bruta" },
+  { value: "<15%", label: "Amido" },
+  { value: ">7%", label: "Extrato Etéreo" },
+  { value: "+20", label: "Artigos Técnicos" }
 ];
 
 const Benefits = () => {
@@ -47,11 +73,12 @@ const Benefits = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-montserrat font-bold text-gray-900 mb-6">
-            Tecnologia Avançada em Nutrição Equina
+            Conceito Nutricional Contemporâneo
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Performance FIT foi desenvolvida especificamente para cavalos com síndrome metabólica, 
-            oferecendo nutrição completa sem comprometer a saúde gastrointestinal.
+            Performance FIT foi desenvolvida baseada em conceito nutricional contemporâneo, que
+            contempla menor teor de amido, maior inclusão de fibras de alta digestibilidade,
+            ingredientes selecionados e aditivos funcionais estratégicos.
           </p>
         </div>
 
@@ -78,23 +105,13 @@ const Benefits = () => {
         </div>
 
         {/* Stats Counter */}
-        <div className="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-8 max-w-4xl mx-auto">
-          <div className="text-center">
-            <div className="text-3xl font-montserrat font-bold text-turquoise mb-2">0%</div>
-            <div className="text-gray-600 font-semibold">Melaço</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-montserrat font-bold text-turquoise mb-2">&lt;15%</div>
-            <div className="text-gray-600 font-semibold">Amido</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-montserrat font-bold text-turquoise mb-2">+20</div>
-            <div className="text-gray-600 font-semibold">Artigos Técnicos</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-montserrat font-bold text-turquoise mb-2">100%</div>
-            <div className="text-gray-600 font-semibold">Natural</div>
-          </div>
+        <div className="mt-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 max-w-5xl mx-auto">
+          {stats.map((stat) => (
+            <div key={stat.label} className="text-center">
+              <div className="text-3xl font-montserrat font-bold text-turquoise mb-2">{stat.value}</div>
+              <div className="text-gray-600 font-semibold">{stat.label}</div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

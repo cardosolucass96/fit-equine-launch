@@ -2,36 +2,36 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { FileText, Play, BarChart3, Clock, Download } from "lucide-react";
+import { FileText, BarChart3, Clock, Download } from "lucide-react";
 
 const libraryItems = [
   {
     id: 1,
     type: "Artigo",
-    title: "Síndrome Metabólica Equina: Abordagem Nutricional",
-    description: "Revisão completa sobre estratégias nutricionais para cavalos com resistência à insulina.",
-    duration: "15 min leitura",
-    category: "Artigos",
+    title: "Baixo amido e segurança metabólica na dieta equina",
+    description: "Conteúdo técnico sobre manejo nutricional com menor teor de amido e controle de carboidratos não estruturais.",
+    duration: "Leitura técnica",
+    category: "Saúde Metabólica",
     thumbnail: "https://images.unsplash.com/photo-1598974357801-cbca100e65d3?q=80&w=2070&auto=format&fit=crop",
     icon: FileText
   },
   {
     id: 2,
-    type: "Vídeo",
-    title: "Formulação de Dietas para Cavalos Metabólicos",
-    description: "Demonstração prática de como balancear rações para cavalos com síndrome metabólica.",
-    duration: "2 min",
-    category: "Vídeos",
+    type: "Artigo",
+    title: "Fibras de alta digestibilidade, alfafa e microbiota intestinal",
+    description: "Material dedicado ao suporte gastrointestinal, à digestibilidade das fibras e ao equilíbrio da microbiota.",
+    duration: "Leitura técnica",
+    category: "Saúde Digestiva",
     thumbnail: "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?q=80&w=2070&auto=format&fit=crop",
-    icon: Play
+    icon: FileText
   },
   {
     id: 3,
-    type: "Estudo",
-    title: "Eficácia da Ração FIT em Cavalos PSI",
-    description: "Estudo de caso com 12 cavalos Puro Sangue Inglês demonstrando melhora dos parâmetros metabólicos.",
-    duration: "8 min leitura",
-    category: "Estudos",
+    type: "Artigo",
+    title: "Ingredientes funcionais estratégicos em dietas para equinos",
+    description: "Panorama técnico sobre antioxidantes, Lithothamnium sp., cromo orgânico e aminoácidos essenciais.",
+    duration: "Leitura técnica",
+    category: "Formulação",
     thumbnail: "https://images.unsplash.com/photo-1694446942933-bc29e37df9f3?q=80&w=2070&auto=format&fit=crop",
     icon: BarChart3
   }
@@ -39,7 +39,7 @@ const libraryItems = [
 
 const TechnicalLibrary = () => {
   const [activeFilter, setActiveFilter] = useState("Todos");
-  const filters = ["Todos", "Artigos", "Vídeos", "Estudos"];
+  const filters = ["Todos", "Saúde Metabólica", "Saúde Digestiva", "Formulação"];
 
   const filteredItems = activeFilter === "Todos" 
     ? libraryItems 
@@ -60,7 +60,7 @@ const TechnicalLibrary = () => {
             Biblioteca Técnica Exclusiva
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Acesse conteúdos científicos desenvolvidos por especialistas em nutrição equina
+            Acesse uma prévia da biblioteca com mais de 20 artigos técnicos voltados à nutrição equina
           </p>
         </div>
 
@@ -134,7 +134,7 @@ const TechnicalLibrary = () => {
 
         <div className="text-center mt-12">
           <p className="text-gray-600 mb-6">
-            Cadastre-se para acessar nossa biblioteca completa com mais de 20 materiais exclusivos
+            Cadastre-se para acessar nossa biblioteca completa com mais de 20 artigos técnicos exclusivos
           </p>
           <Button 
             onClick={scrollToForm}
