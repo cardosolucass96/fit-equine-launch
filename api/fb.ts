@@ -4,13 +4,44 @@ import rateLimit from 'express-rate-limit';
 import { sha256 } from '../src/utils/hash';
 
 const limiter = rateLimit({ windowMs: 60_000, max: 150 });
+const KOMMO_WEBHOOK_URL =
+  process.env.KOMMO_WEBHOOK_URL ?? 'https://webhook-n8n.grupovorp.com/webhook/integral-mix';
+type LimiterRequest = Parameters<typeof limiter>[0];
+type LimiterResponse = Parameters<typeof limiter>[1];
+
+const parseResponseBody = async (response: Response) => {
+  const text = await response.text();
+
+  if (!text) {
+    return null;
+  }
+
+  try {
+    return JSON.parse(text);
+  } catch {
+    return text;
+  }
+};
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  await new Promise(r => limiter(req as any, res as any, r));
+  await new Promise<void>((resolve, reject) => {
+    limiter(
+      req as unknown as LimiterRequest,
+      res as unknown as LimiterResponse,
+      (error?: unknown) => {
+        if (error) {
+          reject(error);
+          return;
+        }
+
+        resolve();
+      }
+    );
+  });
   if (req.method !== 'POST') return res.status(405).end();
 
   const {
-    name, email, whatsapp, city, state,
+    name, email, whatsapp, crm, city, state,
     profession, utm_source, utm_medium,
     utm_campaign, utm_term, utm_content,
     lgpdConsent, event_id
@@ -43,6 +74,44 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     consent: { lgpd: lgpdConsent }
   };
 
+  const webhookRes = await fetch(KOMMO_WEBHOOK_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name: name ?? '',
+      email: email ?? '',
+      whatsapp: whatsapp ?? '',
+      profession: profession ?? '',
+      state: state ?? '',
+      city: city ?? '',
+      utm_source: utm_source ?? '',
+      utm_medium: utm_medium ?? '',
+      utm_campaign: utm_campaign ?? '',
+      utm_term: utm_term ?? '',
+      utm_content: utm_content ?? '',
+      lgpdConsent: Boolean(lgpdConsent),
+      crm: crm ?? ''
+    })
+  });
+
+  const webhookBody = await parseResponseBody(webhookRes);
+
+  if (!webhookRes.ok) {
+    return res.status(502).json({
+      ok: false,
+      message: 'Failed to forward lead to webhook',
+      webhook: webhookBody
+    });
+  }
+
+  if (!process.env.FB_PIXEL_ID || !process.env.FB_TOKEN) {
+    return res.status(200).json({
+      ok: true,
+      webhook: webhookBody,
+      fbStatus: 'skipped'
+    });
+  }
+
   const fbRes = await fetch(
     `https://graph.facebook.com/v19.0/${process.env.FB_PIXEL_ID}/events`,
     {
@@ -57,5 +126,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
   );
 
-  return res.status(fbRes.ok ? 200 : 400).json(await fbRes.json());
+  const fbBody = await parseResponseBody(fbRes);
+
+  if (!fbRes.ok) {
+    console.error('Facebook Conversion API request failed', fbBody);
+  }
+
+  return res.status(200).json({
+    ok: true,
+    webhook: webhookBody,
+    fbStatus: fbRes.ok ? 'sent' : 'failed',
+    fb: fbBody
+  });
 }

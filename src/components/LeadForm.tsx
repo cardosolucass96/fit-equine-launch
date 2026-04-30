@@ -39,6 +39,9 @@ const LeadForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
     const eventID = uuid();
+    const searchParams = typeof window !== 'undefined'
+      ? new URLSearchParams(window.location.search)
+      : null;
 
     // Validate required fields
     if (!formData.name || !formData.email || !formData.whatsapp || !formData.lgpdConsent) {
@@ -52,18 +55,32 @@ const LeadForm = () => {
     }
 
     try {
-      if (typeof window !== 'undefined' && (window as any).fbq) {
-        (window as any).fbq('track', 'Lead', {
+      if (typeof window !== 'undefined' && window.fbq) {
+        window.fbq('track', 'Lead', {
           content_name: formData.crm,
           eventID
         });
       }
 
-      await fetch('/api/fb', {
+      const response = await fetch('/api/fb', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, event_id: eventID })
+        body: JSON.stringify({
+          ...formData,
+          city: "",
+          profession: "",
+          utm_source: searchParams?.get('utm_source') ?? "",
+          utm_medium: searchParams?.get('utm_medium') ?? "",
+          utm_campaign: searchParams?.get('utm_campaign') ?? "",
+          utm_term: searchParams?.get('utm_term') ?? "",
+          utm_content: searchParams?.get('utm_content') ?? "",
+          event_id: eventID
+        })
       });
+
+      if (!response.ok) {
+        throw new Error('Lead submission failed');
+      }
       
       // Send event to dataLayer for Google Tag Manager
       if (typeof window !== 'undefined' && window.dataLayer) {
