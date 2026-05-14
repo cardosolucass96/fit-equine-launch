@@ -17,6 +17,7 @@ type ApiRequest = {
     name?: string;
     email?: string;
     whatsapp?: string;
+    crmv?: string;
     crm?: string;
     city?: string;
     state?: string;
@@ -69,6 +70,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       name,
       email,
       whatsapp,
+      crmv,
       crm,
       city,
       state,
@@ -81,6 +83,8 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       lgpdConsent,
       event_id
     } = req.body || {};
+
+    const crmvValue = crmv ?? crm ?? '';
 
     const webhookPayload = {
       name: name ?? '',
@@ -95,7 +99,8 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       utm_term: utm_term ?? '',
       utm_content: utm_content ?? '',
       lgpdConsent: Boolean(lgpdConsent),
-      crm: crm ?? ''
+      crmv: crmvValue,
+      crm: crmvValue
     };
 
     const webhookRes = await fetch(KOMMO_WEBHOOK_URL, {

@@ -20,7 +20,7 @@ const LeadForm = () => {
     name: "",
     email: "",
     whatsapp: "",
-    crm: "",
+    crmv: "",
     state: "",
     lgpdConsent: false
   });
@@ -57,7 +57,7 @@ const LeadForm = () => {
     try {
       if (typeof window !== 'undefined' && window.fbq) {
         window.fbq('track', 'Lead', {
-          content_name: formData.crm,
+          content_name: formData.crmv,
           eventID
         });
       }
@@ -225,15 +225,15 @@ const LeadForm = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="crm" className="font-montserrat font-semibold">
-                  CRM
+                <Label htmlFor="crmv" className="font-montserrat font-semibold">
+                  CRMV
                 </Label>
                 <Input
-                  id="crm"
+                  id="crmv"
                   type="text"
-                  placeholder="Número do CRM"
-                  value={formData.crm}
-                  onChange={(e) => handleInputChange('crm', e.target.value)}
+                  placeholder="Número do CRMV"
+                  value={formData.crmv}
+                  onChange={(e) => handleInputChange('crmv', e.target.value)}
                   className="h-12"
                 />
               </div>
