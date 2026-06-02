@@ -15,39 +15,81 @@ const brazilianStates = [
   "RS", "RO", "RR", "SC", "SP", "SE", "TO"
 ];
 
+type LeadFormData = {
+  name: string;
+  email: string;
+  whatsapp: string;
+  crmv: string;
+  state: string;
+  isVeterinarian: boolean;
+  isBreeder: boolean;
+  isCompetitor: boolean;
+  lgpdConsent: boolean;
+};
+
+const initialFormData: LeadFormData = {
+  name: "",
+  email: "",
+  whatsapp: "",
+  crmv: "",
+  state: "",
+  isVeterinarian: false,
+  isBreeder: false,
+  isCompetitor: false,
+  lgpdConsent: false
+};
+
+const getSelectedProfiles = (data: LeadFormData) => {
+  const profiles: string[] = [];
+
+  if (data.isVeterinarian) profiles.push("Veterinario");
+  if (data.isBreeder) profiles.push("Criador");
+  if (data.isCompetitor) profiles.push("Competidor");
+
+  return profiles;
+};
+
 const LeadForm = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    whatsapp: "",
-    crmv: "",
-    state: "",
-    lgpdConsent: false
-  });
+  const [formData, setFormData] = useState<LeadFormData>(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { toast } = useToast();
 
-  const handleInputChange = (field: string, value: string | boolean) => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: value
-    }));
+  const handleInputChange = <K extends keyof LeadFormData>(field: K, value: LeadFormData[K]) => {
+    setFormData((prev) => {
+      const nextData = {
+        ...prev,
+        [field]: value
+      };
+
+      if (field === "isVeterinarian" && !value) {
+        nextData.crmv = "";
+      }
+
+      return nextData;
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     const eventID = uuid();
+    const selectedProfiles = getSelectedProfiles(formData);
     const searchParams = typeof window !== 'undefined'
       ? new URLSearchParams(window.location.search)
       : null;
 
     // Validate required fields
-    if (!formData.name || !formData.email || !formData.whatsapp || !formData.lgpdConsent) {
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.whatsapp ||
+      !formData.lgpdConsent ||
+      (formData.isVeterinarian && !formData.crmv)
+    ) {
       toast({
         title: "Campos obrigatórios",
-        description: "Por favor, preencha todos os campos obrigatórios.",
+        description: "Por favor, preencha todos os campos obrigatórios. Para veterinário, o registro é obrigatório.",
         variant: "destructive",
       });
       setIsSubmitting(false);
@@ -57,7 +99,7 @@ const LeadForm = () => {
     try {
       if (typeof window !== 'undefined' && window.fbq) {
         window.fbq('track', 'Lead', {
-          content_name: formData.crmv,
+          content_name: selectedProfiles.join(", ") || formData.crmv,
           eventID
         });
       }
@@ -68,7 +110,7 @@ const LeadForm = () => {
         body: JSON.stringify({
           ...formData,
           city: "",
-          profession: "",
+          profession: selectedProfiles.join(", "),
           utm_source: searchParams?.get('utm_source') ?? "",
           utm_medium: searchParams?.get('utm_medium') ?? "",
           utm_campaign: searchParams?.get('utm_campaign') ?? "",
@@ -225,8 +267,71 @@ const LeadForm = () => {
               </div>
 
               <div className="space-y-2">
+                <Label htmlFor="state" className="font-montserrat font-semibold">
+                  Estado
+                </Label>
+                <Select onValueChange={(value) => handleInputChange('state', value)} value={formData.state}>
+                  <SelectTrigger className="h-12">
+                    <SelectValue placeholder="Selecione seu estado" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {brazilianStates.map((state) => (
+                      <SelectItem key={state} value={state}>
+                        {state}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <Label className="font-montserrat font-semibold">
+                Perfil
+              </Label>
+              <div className="grid gap-3 sm:grid-cols-3">
+                <Label
+                  htmlFor="isVeterinarian"
+                  className="flex items-center space-x-3 rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-700 cursor-pointer"
+                >
+                  <Checkbox
+                    id="isVeterinarian"
+                    checked={formData.isVeterinarian}
+                    onCheckedChange={(checked) => handleInputChange('isVeterinarian', checked === true)}
+                  />
+                  <span>Veterinário</span>
+                </Label>
+
+                <Label
+                  htmlFor="isBreeder"
+                  className="flex items-center space-x-3 rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-700 cursor-pointer"
+                >
+                  <Checkbox
+                    id="isBreeder"
+                    checked={formData.isBreeder}
+                    onCheckedChange={(checked) => handleInputChange('isBreeder', checked === true)}
+                  />
+                  <span>Criador</span>
+                </Label>
+
+                <Label
+                  htmlFor="isCompetitor"
+                  className="flex items-center space-x-3 rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-700 cursor-pointer"
+                >
+                  <Checkbox
+                    id="isCompetitor"
+                    checked={formData.isCompetitor}
+                    onCheckedChange={(checked) => handleInputChange('isCompetitor', checked === true)}
+                  />
+                  <span>Competidor</span>
+                </Label>
+              </div>
+            </div>
+
+            {formData.isVeterinarian && (
+              <div className="space-y-2">
                 <Label htmlFor="crmv" className="font-montserrat font-semibold">
-                  CRMV
+                  Registro profissional *
                 </Label>
                 <Input
                   id="crmv"
@@ -235,27 +340,10 @@ const LeadForm = () => {
                   value={formData.crmv}
                   onChange={(e) => handleInputChange('crmv', e.target.value)}
                   className="h-12"
+                  required={formData.isVeterinarian}
                 />
               </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="state" className="font-montserrat font-semibold">
-                Estado
-              </Label>
-              <Select onValueChange={(value) => handleInputChange('state', value)}>
-                <SelectTrigger className="h-12">
-                  <SelectValue placeholder="Selecione seu estado" />
-                </SelectTrigger>
-                <SelectContent>
-                  {brazilianStates.map((state) => (
-                    <SelectItem key={state} value={state}>
-                      {state}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
+            )}
 
             <div className="flex items-start space-x-2">
               <Checkbox
