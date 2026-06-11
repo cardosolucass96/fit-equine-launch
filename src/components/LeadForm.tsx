@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Clock, Users, ExternalLink } from "lucide-react";
@@ -15,15 +16,15 @@ const brazilianStates = [
   "RS", "RO", "RR", "SC", "SP", "SE", "TO"
 ];
 
+type LeadProfile = "" | "Veterinario" | "Criador" | "Competidor";
+
 type LeadFormData = {
   name: string;
   email: string;
   whatsapp: string;
   crmv: string;
   state: string;
-  isVeterinarian: boolean;
-  isBreeder: boolean;
-  isCompetitor: boolean;
+  profile: LeadProfile;
   lgpdConsent: boolean;
 };
 
@@ -33,20 +34,8 @@ const initialFormData: LeadFormData = {
   whatsapp: "",
   crmv: "",
   state: "",
-  isVeterinarian: false,
-  isBreeder: false,
-  isCompetitor: false,
+  profile: "",
   lgpdConsent: false
-};
-
-const getSelectedProfiles = (data: LeadFormData) => {
-  const profiles: string[] = [];
-
-  if (data.isVeterinarian) profiles.push("Veterinario");
-  if (data.isBreeder) profiles.push("Criador");
-  if (data.isCompetitor) profiles.push("Competidor");
-
-  return profiles;
 };
 
 const LeadForm = () => {
@@ -62,7 +51,7 @@ const LeadForm = () => {
         [field]: value
       };
 
-      if (field === "isVeterinarian" && !value) {
+      if (field === "profile" && value !== "Veterinario") {
         nextData.crmv = "";
       }
 
@@ -74,7 +63,6 @@ const LeadForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
     const eventID = uuid();
-    const selectedProfiles = getSelectedProfiles(formData);
     const searchParams = typeof window !== 'undefined'
       ? new URLSearchParams(window.location.search)
       : null;
@@ -85,7 +73,7 @@ const LeadForm = () => {
       !formData.email ||
       !formData.whatsapp ||
       !formData.lgpdConsent ||
-      (formData.isVeterinarian && !formData.crmv)
+      (formData.profile === "Veterinario" && !formData.crmv)
     ) {
       toast({
         title: "Campos obrigatórios",
@@ -99,7 +87,7 @@ const LeadForm = () => {
     try {
       if (typeof window !== 'undefined' && window.fbq) {
         window.fbq('track', 'Lead', {
-          content_name: selectedProfiles.join(", ") || formData.crmv,
+          content_name: formData.profile || formData.crmv,
           eventID
         });
       }
@@ -110,7 +98,7 @@ const LeadForm = () => {
         body: JSON.stringify({
           ...formData,
           city: "",
-          profession: selectedProfiles.join(", "),
+          profession: formData.profile,
           utm_source: searchParams?.get('utm_source') ?? "",
           utm_medium: searchParams?.get('utm_medium') ?? "",
           utm_campaign: searchParams?.get('utm_campaign') ?? "",
@@ -289,46 +277,38 @@ const LeadForm = () => {
               <Label className="font-montserrat font-semibold">
                 Perfil
               </Label>
-              <div className="grid gap-3 sm:grid-cols-3">
+              <RadioGroup
+                value={formData.profile}
+                onValueChange={(value) => handleInputChange('profile', value as LeadProfile)}
+                className="grid gap-3 sm:grid-cols-3"
+              >
                 <Label
-                  htmlFor="isVeterinarian"
+                  htmlFor="profile-veterinario"
                   className="flex items-center space-x-3 rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-700 cursor-pointer"
                 >
-                  <Checkbox
-                    id="isVeterinarian"
-                    checked={formData.isVeterinarian}
-                    onCheckedChange={(checked) => handleInputChange('isVeterinarian', checked === true)}
-                  />
+                  <RadioGroupItem id="profile-veterinario" value="Veterinario" />
                   <span>Veterinário</span>
                 </Label>
 
                 <Label
-                  htmlFor="isBreeder"
+                  htmlFor="profile-criador"
                   className="flex items-center space-x-3 rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-700 cursor-pointer"
                 >
-                  <Checkbox
-                    id="isBreeder"
-                    checked={formData.isBreeder}
-                    onCheckedChange={(checked) => handleInputChange('isBreeder', checked === true)}
-                  />
+                  <RadioGroupItem id="profile-criador" value="Criador" />
                   <span>Criador</span>
                 </Label>
 
                 <Label
-                  htmlFor="isCompetitor"
+                  htmlFor="profile-competidor"
                   className="flex items-center space-x-3 rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-700 cursor-pointer"
                 >
-                  <Checkbox
-                    id="isCompetitor"
-                    checked={formData.isCompetitor}
-                    onCheckedChange={(checked) => handleInputChange('isCompetitor', checked === true)}
-                  />
+                  <RadioGroupItem id="profile-competidor" value="Competidor" />
                   <span>Competidor</span>
                 </Label>
-              </div>
+              </RadioGroup>
             </div>
 
-            {formData.isVeterinarian && (
+            {formData.profile === "Veterinario" && (
               <div className="space-y-2">
                 <Label htmlFor="crmv" className="font-montserrat font-semibold">
                   Registro profissional *
@@ -340,7 +320,7 @@ const LeadForm = () => {
                   value={formData.crmv}
                   onChange={(e) => handleInputChange('crmv', e.target.value)}
                   className="h-12"
-                  required={formData.isVeterinarian}
+                  required={formData.profile === "Veterinario"}
                 />
               </div>
             )}
