@@ -10,6 +10,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { Clock, Users, ExternalLink } from "lucide-react";
 
+const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/Ecq3icv0fbK5Wm6yBzXdhU?mode=gi_t";
+
 const brazilianStates = [
   "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", 
   "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", 
@@ -124,9 +126,6 @@ const LeadForm = () => {
         });
       }
 
-      // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
       setIsSubmitted(true);
       toast({
         title: "Sucesso!",
@@ -144,13 +143,6 @@ const LeadForm = () => {
     }
   };
 
-  const handleWhatsAppRedirect = () => {
-    // Redirect to WhatsApp group after 1.5s delay
-    setTimeout(() => {
-      window.open('https://chat.whatsapp.com/Ecq3icv0fbK5Wm6yBzXdhU?mode=gi_t', '_blank');
-    }, 1500);
-  };
-
   if (isSubmitted) {
     return (
       <section id="lead-form" className="py-20 bg-white">
@@ -165,12 +157,14 @@ const LeadForm = () => {
                 Clique no botão abaixo para entrar no grupo exclusivo de WhatsApp e receber 
                 todas as novidades sobre a Performance FIT em primeira mão.
               </p>
-              <Button 
-                onClick={handleWhatsAppRedirect}
+              <Button
+                asChild
                 className="bg-green-500 hover:bg-green-600 text-white font-montserrat font-semibold text-lg px-8 py-3"
               >
-                <ExternalLink className="h-5 w-5 mr-2" />
-                Entrar no grupo VIP
+                <a href={WHATSAPP_GROUP_URL} rel="noopener noreferrer">
+                  <ExternalLink className="h-5 w-5 mr-2" />
+                  Entrar no grupo VIP
+                </a>
               </Button>
             </div>
           </div>
