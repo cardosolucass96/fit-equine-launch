@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { v4 as uuid } from 'uuid';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -44,7 +44,29 @@ const LeadForm = () => {
   const [formData, setFormData] = useState<LeadFormData>(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const successCardRef = useRef<HTMLDivElement | null>(null);
   const { toast } = useToast();
+
+  useEffect(() => {
+    if (!isSubmitted || typeof window === "undefined") {
+      return;
+    }
+
+    const successCard = successCardRef.current;
+
+    if (!successCard) {
+      return;
+    }
+
+    const scrollTop = successCard.getBoundingClientRect().top + window.scrollY - 96;
+    window.scrollTo({ top: Math.max(scrollTop, 0), behavior: "smooth" });
+
+    const focusTimer = window.setTimeout(() => {
+      successCard.querySelector<HTMLAnchorElement>("a")?.focus();
+    }, 450);
+
+    return () => window.clearTimeout(focusTimer);
+  }, [isSubmitted]);
 
   const handleInputChange = <K extends keyof LeadFormData>(field: K, value: LeadFormData[K]) => {
     setFormData((prev) => {
@@ -145,21 +167,30 @@ const LeadForm = () => {
 
   if (isSubmitted) {
     return (
-      <section id="lead-form" className="py-20 bg-white">
+      <section id="lead-form" className="scroll-mt-24 bg-white py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto text-center">
-            <div className="bg-green-50 border border-green-200 rounded-2xl p-8 mb-8">
+            <div
+              ref={successCardRef}
+              className="mb-8 overflow-hidden rounded-[2rem] border border-green-200 bg-gradient-to-b from-white via-green-50 to-green-100 p-8 shadow-2xl shadow-green-200/70 md:p-10"
+            >
+              <div className="mb-4 inline-flex rounded-full bg-green-600 px-4 py-1 text-sm font-montserrat font-semibold uppercase tracking-[0.18em] text-white">
+                Próximo passo
+              </div>
               <div className="text-green-600 text-6xl mb-4">✓</div>
               <h3 className="text-2xl font-montserrat font-bold text-gray-900 mb-4">
                 Obrigado! Você está na lista VIP
               </h3>
-              <p className="text-gray-600 mb-6">
+              <p className="text-lg text-gray-700 mb-3">
                 Clique no botão abaixo para entrar no grupo exclusivo de WhatsApp e receber 
                 todas as novidades sobre a Performance FIT em primeira mão.
               </p>
+              <p className="mb-8 font-montserrat font-semibold text-green-800">
+                Seu acesso ao grupo VIP está liberado agora.
+              </p>
               <Button
                 asChild
-                className="bg-green-500 hover:bg-green-600 text-white font-montserrat font-semibold text-lg px-8 py-3"
+                className="h-auto w-full rounded-2xl bg-green-500 px-8 py-5 text-lg font-montserrat font-bold text-white shadow-[0_18px_45px_rgba(34,197,94,0.35)] ring-4 ring-green-200 transition-all hover:scale-[1.02] hover:bg-green-600 hover:shadow-[0_22px_55px_rgba(22,163,74,0.4)] focus-visible:ring-green-500 sm:w-auto"
               >
                 <a href={WHATSAPP_GROUP_URL} rel="noopener noreferrer">
                   <ExternalLink className="h-5 w-5 mr-2" />
