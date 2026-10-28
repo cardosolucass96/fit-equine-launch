@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { Clock, Users, ExternalLink } from "lucide-react";
 
-const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/Ecq3icv0fbK5Wm6yBzXdhU?mode=gi_t";
+const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/Ea7FHjp5oGOAnuzEjbamMB";
 
 const brazilianStates = [
   "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", 
